@@ -31,17 +31,20 @@ const appendImgTpl = ({ hits }) => {
 };
 
 const checkMoreImg = ({ data }) => {
-  const isImgData = data.hits === {};
-  const isMoreImg = data.hits.length === imgApiService.perPage;
+  const isNoImgData = data.totalHits === 0;
+  const isImgData = data.totalHits > 0;
+  const isLessImgThenPerPage = data.hits.length < imgApiService.perPage && data.totalHits !== 0;
 
-  Notify.success(`Hooray! We found ${data.totalHits} images.`);
-
-  if (isImgData) {
+  if (isNoImgData) {
     Notify.failure('Sorry, there are no images matching your search query. Please try again.');
     loadMoreBtn.hide();
   }
 
-  if (!isMoreImg) {
+  if (isImgData) {
+    Notify.success(`Hooray! We found ${data.totalHits} images.`);
+  }
+
+  if (isLessImgThenPerPage) {
     Notify.warning("We're sorry, but you've reached the end of search results.");
     loadMoreBtn.hide();
   }
