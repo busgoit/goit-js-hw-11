@@ -9,42 +9,23 @@
   <body>
     <form class="search-form" id="search-form">
       <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
-      <button type="submit">Search</button>
+      <button class="btn" type="submit">Search</button>
     </form>
 
     <!-- Элемент div.gallery изначально есть в HTML документе, и в него необходимо рендерить разметку карточек изображений. 
       При поиске по новому ключевому слову необходимо полностью очищать содержимое галереи, чтобы не смешивать результаты. -->
 
-    <div class="gallery">
-      <!-- Карточки изображений -->
-    </div>
-
-    <!-- Шаблон разметки карточки одного изображения для галереи. -->
-
-    <!-- <div class="photo-card">
-      <img src="" alt="" loading="lazy" />
-      <div class="info">
-        <p class="info-item">
-          <b>Likes</b>
-        </p>
-        <p class="info-item">
-          <b>Views</b>
-        </p>
-        <p class="info-item">
-          <b>Comments</b>
-        </p>
-        <p class="info-item">
-          <b>Downloads</b>
-        </p>
-      </div>
-    </div> -->
+    <div class="gallery"></div>
 
     <!-- 
     В HTML документе уже есть разметка кнопки при клике по которой 
     необходимо выполнять запрос за следующей группой изображений 
     и добавлять разметку к уже существующим элементам галереи. -->
 
-    <button type="button" class="load-more">Load more</button>
+    <button type="button" class="btn load-more is-hidden" data-action="load-more">
+      <span class="spinner is-hidden">Loading...</span>
+      <span class="label">Load more</span>
+    </button>
 
     <script src="index.js" type="module"></script>
   </body>

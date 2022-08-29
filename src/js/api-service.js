@@ -8,11 +8,20 @@ export default class ImgApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this.perPage = 10;
+  }
+
+  get query() {
+    return this.searchQuery;
+  }
+
+  set query(newSearchQuery) {
+    this.searchQuery = newSearchQuery;
   }
 
   fetchImg() {
     return axios.get(
-      `${BASE_URL}/?key=${API_KEY}&q=${this.searchQuery}&${SEARCH_FILTER}&per_page=5&page=${this.page}`
+      `${BASE_URL}/?key=${API_KEY}&q=${this.searchQuery}&${SEARCH_FILTER}&per_page=${this.perPage}&page=${this.page}`
     );
   }
 }
