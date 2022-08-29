@@ -19,8 +19,16 @@ export default class ImgApiService {
     this.searchQuery = newSearchQuery;
   }
 
-  fetchImg() {
-    return axios.get(
+  incrementPage() {
+    this.page += 1;
+  }
+
+  resetPage() {
+    this.page = 1;
+  }
+
+  async fetchImg() {
+    return await axios.get(
       `${BASE_URL}/?key=${API_KEY}&q=${this.searchQuery}&${SEARCH_FILTER}&per_page=${this.perPage}&page=${this.page}`
     );
   }
