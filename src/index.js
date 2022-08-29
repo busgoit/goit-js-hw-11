@@ -20,7 +20,7 @@ const loadMoreBtn = new LoadMoreBtn({
 
 const imgApiService = new ImgApiService();
 
-const lightbox = new SimpleLightbox('.gallery a', {
+const lightbox = new SimpleLightbox('.gallery .photo-card a', {
   // showCounter: false,
   // scrollZoom: false,
   // showCaptions: true,
@@ -30,6 +30,8 @@ const lightbox = new SimpleLightbox('.gallery a', {
   // captionPosition: 'bottom',
   // captionDelay: 250,
 });
+
+console.log(lightbox);
 
 const appendImgTpl = ({ hits }) => {
   refs.gallery.insertAdjacentHTML('beforeend', photoCardTpl(hits));
@@ -84,12 +86,14 @@ const onSearch = event => {
 
   fetchImg();
   lightbox.refresh();
+  console.log(lightbox);
 };
 
 const onLoadMore = () => {
   imgApiService.incrementPage();
   fetchImg();
   lightbox.refresh();
+  console.log(lightbox);
 };
 
 refs.searchForm.addEventListener('submit', onSearch);
