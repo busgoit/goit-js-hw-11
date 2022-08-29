@@ -5,8 +5,8 @@ import ImgApiService from './js/api-service';
 import photoCardTpl from './templates/photoCardTpl.hbs';
 import LoadMoreBtn from './js/load-more-btn';
 
-import 'simplelightbox/dist/simple-lightbox.min.css';
 import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const refs = {
   searchForm: document.querySelector('.search-form'),
@@ -31,7 +31,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
   // captionDelay: 250,
 });
 
-console.log(lightbox);
+// console.log(lightbox);
 
 const appendImgTpl = ({ hits }) => {
   refs.gallery.insertAdjacentHTML('beforeend', photoCardTpl(hits));
@@ -63,7 +63,14 @@ const fetchImg = () => {
     .then(appendImgTpl)
     .catch(function (error) {
       console.log(error);
-    });
+    })
+    .finally(
+      () => {
+        lightbox.refresh();
+      }
+      // console.log('finaly');
+      // console.log(lightbox);
+    );
 
   loadMoreBtn.enable();
 };
@@ -87,17 +94,17 @@ const onSearch = event => {
   loadMoreBtn.show();
 
   fetchImg();
-  lightbox.refresh();
+  // lightbox.refresh();
 
-  console.log(lightbox);
+  // console.log(lightbox);
 };
 
 const onLoadMore = () => {
   imgApiService.incrementPage();
   fetchImg();
-  lightbox.refresh();
+  // lightbox.refresh();
 
-  console.log(lightbox);
+  // console.log(lightbox);
 };
 
 refs.searchForm.addEventListener('submit', onSearch);
