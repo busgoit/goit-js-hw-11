@@ -21,17 +21,10 @@ const loadMoreBtn = new LoadMoreBtn({
 const imgApiService = new ImgApiService();
 
 const lightbox = new SimpleLightbox('.gallery a', {
-  // showCounter: false,
-  // scrollZoom: false,
-  // showCaptions: true,
-  // captionType: 'data',
-  // captionsData: 'caption',
-  // sourceAttr: 'data-href',
-  // captionPosition: 'bottom',
-  // captionDelay: 250,
+  captions: true,
+  captionsData: 'alt',
+  captionDelay: 250,
 });
-
-// console.log(lightbox);
 
 const appendImgTpl = ({ hits }) => {
   refs.gallery.insertAdjacentHTML('beforeend', photoCardTpl(hits));
@@ -40,6 +33,8 @@ const appendImgTpl = ({ hits }) => {
 const checkMoreImg = ({ data }) => {
   const isImgData = data.hits === {};
   const isMoreImg = data.hits.length === imgApiService.perPage;
+
+  Notify.success(`Hooray! We found ${data.totalHits} images.`);
 
   if (isImgData) {
     Notify.failure('Sorry, there are no images matching your search query. Please try again.');
@@ -50,8 +45,6 @@ const checkMoreImg = ({ data }) => {
     Notify.warning("We're sorry, but you've reached the end of search results.");
     loadMoreBtn.hide();
   }
-
-  Notify.success(`Hooray! We found ${data.totalHits} images.`);
 
   return data;
 };
@@ -64,13 +57,9 @@ const fetchImg = () => {
     .catch(function (error) {
       console.log(error);
     })
-    .finally(
-      () => {
-        lightbox.refresh();
-      }
-      // console.log('finaly');
-      // console.log(lightbox);
-    );
+    .finally(() => {
+      lightbox.refresh();
+    });
 
   loadMoreBtn.enable();
 };
@@ -94,17 +83,11 @@ const onSearch = event => {
   loadMoreBtn.show();
 
   fetchImg();
-  // lightbox.refresh();
-
-  // console.log(lightbox);
 };
 
 const onLoadMore = () => {
   imgApiService.incrementPage();
   fetchImg();
-  // lightbox.refresh();
-
-  // console.log(lightbox);
 };
 
 refs.searchForm.addEventListener('submit', onSearch);
