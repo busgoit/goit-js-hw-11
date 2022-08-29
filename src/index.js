@@ -59,6 +59,7 @@ const fetchImg = () => {
     .then(appendImgTpl)
     .catch(function (error) {
       console.log(error);
+      Notify.failure(`${error}`);
     })
     .finally(() => {
       lightbox.refresh();
