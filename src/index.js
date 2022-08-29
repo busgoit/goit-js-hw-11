@@ -20,7 +20,7 @@ const loadMoreBtn = new LoadMoreBtn({
 
 const imgApiService = new ImgApiService();
 
-const lightbox = new SimpleLightbox('.gallery .photo-card a', {
+const lightbox = new SimpleLightbox('.gallery a', {
   // showCounter: false,
   // scrollZoom: false,
   // showCaptions: true,
@@ -50,6 +50,8 @@ const checkMoreImg = ({ data }) => {
     Notify.warning("We're sorry, but you've reached the end of search results.");
     loadMoreBtn.hide();
   }
+
+  Notify.success(`Hooray! We found ${data.totalHits} images.`);
 
   return data;
 };
@@ -86,6 +88,7 @@ const onSearch = event => {
 
   fetchImg();
   lightbox.refresh();
+
   console.log(lightbox);
 };
 
@@ -93,6 +96,7 @@ const onLoadMore = () => {
   imgApiService.incrementPage();
   fetchImg();
   lightbox.refresh();
+
   console.log(lightbox);
 };
 
