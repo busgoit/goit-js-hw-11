@@ -1,10 +1,8 @@
 import './css/styles.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
 import ImgApiService from './js/api-service';
 import photoCardTpl from './templates/photoCardTpl.hbs';
 import LoadMoreBtn from './js/load-more-btn';
-
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
