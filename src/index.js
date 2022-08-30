@@ -73,6 +73,7 @@ const clearImgPage = () => {
 const onSearch = event => {
   event.preventDefault();
   clearImgPage();
+  imgApiService.resetPage();
 
   const newSearchQuery = event.currentTarget.elements.searchQuery.value;
 
